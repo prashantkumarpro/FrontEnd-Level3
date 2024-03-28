@@ -11,6 +11,9 @@
     background-color: #EF9D71;
 }
 
+.video_div{
+    clip-path: circle(var(--clip) at 50% 50%) ;
+}
 body[theme="black"] {
     background-color: var(--black);
 }
