@@ -45,8 +45,20 @@ function realPageAnimation() {
     })
 }
 
+const imageArray = [
+    { image: 'https://assets-global.website-files.com/659dbdfd5a080be8d3483190/659dbdfd5a080be8d3483259_Rick%20McCartney%20.png', id: 1, },
+    { image: 'https://assets-global.website-files.com/659dbdfd5a080be8d3483190/65cd134a7ece047ea2260d5b_Caroline%20Nieto.png', id: 2 },
+    { image: 'https://assets-global.website-files.com/659dbdfd5a080be8d3483190/659dbdfd5a080be8d348325a_655d4fbc461dbfc3c7e1914e_Dr.20Jana20Hapfelmeier.png', id: 3 },
+    { image: 'https://assets-global.website-files.com/659dbdfd5a080be8d3483190/659dbdfd5a080be8d34832da_655d501d4436fe51b356605d_Michael20Robin.png', id: 4 },
+    { image: 'https://assets-global.website-files.com/659dbdfd5a080be8d3483190/659dbdfd5a080be8d348325a_655d4fbc461dbfc3c7e1914e_Dr.20Jana20Hapfelmeier.png', id: 5 },
+    { image: 'https://assets-global.website-files.com/659dbdfd5a080be8d3483190/659dbdfd5a080be8d34832da_655d501d4436fe51b356605d_Michael20Robin.png', id: 6 },
+    { image: 'https://assets-global.website-files.com/659dbdfd5a080be8d3483190/65e0bbf51f50ea7c26f413f5_Lenya%20McGrath.png', id: 7 },
+]
+
+
 function teamPageAnimation() {
     document.querySelectorAll('.team_list').forEach(elem => {
+
         elem.addEventListener('mousemove', function (dets) {
             gsap.to(this.querySelector('.picture'), {
                 opacity: 1,
@@ -55,13 +67,30 @@ function teamPageAnimation() {
                 duration: 0.5,
             })
         })
+        elem.addEventListener('mouseenter', function (dets) {
+            this.querySelector('.picture img')
+
+            this.querySelector('.blue_layer').style.height = '100%'
+            this.querySelector('.blue_layer').style.transition = 'ease .5s'
+            this.querySelector('h2').style.color = 'white'
+            this.querySelector('h3').style.color = 'white'
+            this.querySelector('h1').style.opacity = '0.2'
+
+
+        })
         elem.addEventListener('mouseleave', function (dets) {
+            this.querySelector('.blue_layer').style.height = '0%'
+            this.querySelector('.blue_layer').style.transition = 'ease .5s'
+            this.querySelector('h2').style.color = 'black'
+            this.querySelector('h3').style.color = 'black'
+
             gsap.to(this.querySelector('.picture'), {
                 opacity: 0,
                 ease: Power4,
                 duration: 0.5,
             })
         })
+
 
     });
 }
@@ -83,13 +112,14 @@ function paraOneAnimation() {
             end: 'bottom 90%',
             scrub: 1
         },
-        color: '#576FF2',
+        color: '#2E4BEF',
         opacity: 1,
         stagger: .03,
         ease: Power4,
     })
 
 }
+
 function paraTwoAnimation() {
     let clutter = '';
     let paraText = document.querySelector('.para_text2')
@@ -115,8 +145,49 @@ function paraTwoAnimation() {
 
 }
 
+function loco() {
+    (function () {
+        const locomotiveScroll = new LocomotiveScroll();
+    })();
+
+}
+
+function capsuleAnimation() {
+    gsap.to('.capsule2', {
+        scrollTrigger: {
+            trigger: '.capsules',
+            start: 'top 70%',
+            end: 'bottom bottom',
+            scrub: 1
+        },
+        y: 0,
+        ease: Power4
+
+    })
+}
+
+function themeAnimation() {
+    document.querySelectorAll('.section')
+        .forEach(element => {
+            console.log(element.dataset.color)
+            ScrollTrigger.create({
+                trigger: element,
+                start: 'top 50%',
+                end: 'bottom 50%',
+                onEnter: function () { document.body.setAttribute('theme', element.dataset.color) },
+                onEnterBack: function () { document.body.setAttribute('theme', element.dataset.color) }
+            })
+        });
+}
+
+
+
+loco()
 homePageAnimation()
 realPageAnimation()
 teamPageAnimation()
 paraOneAnimation()
 paraTwoAnimation()
+capsuleAnimation()
+themeAnimation()
+
